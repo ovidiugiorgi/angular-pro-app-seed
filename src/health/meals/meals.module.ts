@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router'; 
 
 // shared modules
-import { SharedModule } from '../../auth/shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 // components
 import { MealFormComponent } from './components/meal-form/meal-form.component';

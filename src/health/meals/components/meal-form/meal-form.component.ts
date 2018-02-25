@@ -73,7 +73,6 @@ export class MealFormComponent {
   @Output()
   create = new EventEmitter<Meal>();
 
-
   form = this.fb.group({
     name: ['', Validators.required],
     ingredients: this.fb.array([''])
