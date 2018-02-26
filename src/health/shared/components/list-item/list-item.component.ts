@@ -29,7 +29,7 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
           Yes
         </button>
         <button
-          class="confirm"
+          class="cancel"
           type="button"
           (click)="toggle()">
           No
