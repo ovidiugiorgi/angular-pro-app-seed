@@ -11,10 +11,13 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
 
         <p class="list-item__name">{{ item.name }}</p>
         <p class="list-item__ingredients">
-          <span>
-            {{ item.ingredients }}
+          <span *ngIf="item.ingredients; else showWorkout">
+            {{ item.ingredients | join }}
           </span>
         </p>
+        <ng-template #showWorkout>
+          <span>{{ item | workout }}</span>
+        </ng-template>
 
       </a>
 
@@ -64,9 +67,12 @@ export class ListItemComponent {
 
   removeItem() {
     this.remove.emit(this.item);
-  } 
+  }
 
   getRoute(item: any) {
-    return [`../meals`, item.$key];
+    return [
+      `../${item.ingredients ? 'meals' : 'workouts'}`,
+      item.$key
+    ];
   }
 }
