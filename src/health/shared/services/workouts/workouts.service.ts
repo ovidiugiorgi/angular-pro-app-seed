@@ -24,8 +24,13 @@ export interface Workout {
 @Injectable()
 export class WorkoutsService {
 
-  workouts$: Observable<Workout[]> = this.db.list(`workouts/${this.uid}`)
-    .do(next => this.store.set('workouts', next));
+  workouts$: Observable<any> = this.authState
+    .switchMap(user => (
+      user
+        ? this.db.list(`workouts/${user.uid}`)
+          .do(next => this.store.set('workouts', next))
+        : []
+    ));
 
   constructor(
     private store: Store,
@@ -35,6 +40,10 @@ export class WorkoutsService {
 
   get uid() {
     return this.authService.user.uid;
+  }
+
+  get authState() {
+    return this.authService.authState;
   }
 
   getWorkout(key: string) {
