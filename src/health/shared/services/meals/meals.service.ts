@@ -23,11 +23,10 @@ export interface Meal {
 export class MealsService {
 
   meals$: Observable<any> = this.authState
-    .switchMap(user => (
-      user
-        ? this.db.list(`meals/${user.uid}`)
-            .do(next => this.store.set('meals', next))
-        : []
+    .switchMap(user => (user
+      ? this.db.list(`meals/${user.uid}`)
+          .do(next => this.store.set('meals', next))
+      : []
     ));
 
   constructor(

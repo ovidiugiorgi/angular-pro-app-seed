@@ -25,11 +25,10 @@ export interface Workout {
 export class WorkoutsService {
 
   workouts$: Observable<any> = this.authState
-    .switchMap(user => (
-      user
-        ? this.db.list(`workouts/${user.uid}`)
+    .switchMap(user => (user
+      ? this.db.list(`workouts/${user.uid}`)
           .do(next => this.store.set('workouts', next))
-        : []
+      : []
     ));
 
   constructor(
